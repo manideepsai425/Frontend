@@ -8,8 +8,9 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // 🔗 Replace with your Ngrok URL
-  const API_URL = "import.meta.env.VITE_API_URL";
+  const API_URL = import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL}/predict`
+    : "https://samuel-backend-1.onrender.com/predict";
 
   const predict = async () => {
     try {
@@ -59,11 +60,13 @@ export default function App() {
         {result && (
           <div className="result">
             <h3>🎯 {result.career}</h3>
-            <p>Confidence: {result.confidence.toFixed(2)}%</p>
+            {result.confidence && (
+              <p>Confidence: {result.confidence.toFixed(2)}%</p>
+            )}
 
             <h4>Skills</h4>
             {result.skills.map((s, i) => (
-              <p key={i}>❌ {s}</p>
+              <p key={i}>✅ {s}</p>
             ))}
 
             <h4>Recommendations</h4>
