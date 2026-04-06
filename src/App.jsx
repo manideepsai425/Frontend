@@ -9,7 +9,7 @@ export default function App() {
   const [error, setError] = useState("");
 
   // 🔗 Replace with your Ngrok URL
-  const API_URL = "https://YOUR_NGROK_URL/predict";
+  const API_URL = "import.meta.env.VITE_API_URL";
 
   const predict = async () => {
     try {
